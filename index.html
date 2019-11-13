@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+
+      body {
+        margin: 0px;
+        padding: 50px;
+      }
+
+      h2 {
+        font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+        font-weight: 100;
+        font-size: 30px;
+      }
+
+      textarea {
+        width: 400px;
+        height: 621px;
+      }
+
+      input[type=text], textarea {
+          border: 5px solid transparent;
+          outline: 1px solid transparent;
+      }
+
+      canvas {
+          display: block;
+      }
+
+      form {
+          padding: 20px;
+          position: relative;
+          top: -15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          background: #fafafa;
+      }
+
+      form label {
+          padding: 10px;
+      }
+      small {
+          padding: 20px 20px 10px 20px;
+          display: block;
+      }
+
+      .instructions {
+          display: inline-block;
+          margin-left: 10px;
+          padding: 5px;
+          background: #ffe;
+          display: none;
+      }
+
+      .encrypt-demo .encrypt-demo-instructions,
+      .encrypt .encrypt-instructions,
+      .decrypt .decrypt-instructions {
+          display: inline-block;
+      }
+
+      .encrypt-demo #private-image-url,
+      .encrypt-demo #input-data,
+      .encrypt #private-image-url,
+      .encrypt #input-data,
+      .decrypt #public-image-url,
+      .decrypt #private-image-url {
+          border: 5px solid #ffe;
+          outline: 1px solid #ccc;
+      }
+
+      .encrypt-demo #public-image-url,
+      .encrypt #public-image-url,
+      .decrypt #input-data {
+          pointer-events: none;
+          background: #eee;
+          cursor: default;
+      }
+
+      .private-image,
+      .public-image {
+          width: 960px;
+          height: 635px;
+          display: inline-block;
+          overflow: auto;
+          background: #fafafa;
+          border: 1px solid #ddd;
+      }
+
+      #input-data {
+          width: 400px;
+          height: 621px;
+          display: inline-block;
+      }
+
+      #output-data {
+          background: #fafafa;
+          outline: 1px solid #ddd;
+      }
+
+      #default-data {
+          display: none;
+      }
+
+      #private-image-url,
+      #public-image-url {
+        width: 500px;
+        font-size: 16px;
+        height: 28px;
+        vertical-align: middle;
+      }
+
+    </style>
+  </head>
+  <body class="encrypt">
+      <div id="default-data">
+Nov. 20. 1905
+
+J. H. Todd
+1212 Webster St.
+San Francisco, Cal.
+
+Dear Sir,
+
+Your letter is an insoluble puzzle to me. The handwriting is good and exhibits considerable character, and there are even traces of intelligence in what you say, yet the letter and the accompanying advertisements profess to be the work of the same hand. The person who wrote the advertisements is without doubt the most ignorant person now alive on the planet; also without doubt he is an idiot, an idiot of the 33rd degree, and scion of an ancestral procession of idiots stretching back to the Missing Link. It puzzles me to make out how the same hand could have constructed your letter and your advertisements. Puzzles fret me, puzzles annoy me, puzzles exasperate me; and always, for a moment, they arouse in me an unkind state of mind toward the person who has puzzled me. A few moments from now my resentment will have faded and passed and I shall probably even be praying for you; but while there is yet time I hasten to wish that you may take a dose of your own poison by mistake, and enter swiftly into the damnation which you and all other patent medicine assassins have so remorselessly earned and do so richly deserve.
+
+Adieu, adieu, adieu!
+
+Mark Twain
+      </div>
+      <table>
+          <tr>
+              <td colspan="2">
+                  <form>
+                      <label>
+                          <input type="radio" name="task" value="encrypt-demo" checked="checked" />
+                          Encrypt (Demo)
+                      </label>
+                      <label>
+                          <input type="radio" name="task" value="encrypt" />
+                          Encrypt
+                      </label>
+                      <label>
+                          <input type="radio" name="task" value="decrypt" />
+                          Decrypt
+                      </label>
+                      <div class="instructions encrypt-demo-instructions">
+                          Pre populated demo. Select Encrypt or Decrypt to start from scratch
+                      </div>
+                      <div class="instructions encrypt-instructions">
+                        Enter a Private Key URL and some data to encrypt
+                      </div>
+                      <div class="instructions decrypt-instructions">
+                        Enter URLs for the private and public keys
+                      </div>
+                      <small>Please Note: Loading images without an 'Access-Control-Allow-Origin' header will fail</small>
+                  </form>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <h2>
+                      Original Image (Private Key) <input id="private-image-url" type="text" value="" tabindex=0 placeholder="private Key URL" />
+                  </h2>
+              </td>
+              <td>
+                  <h2>Input Data</h2>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <div class="private-image">
+                    <canvas id="private"></canvas>
+                  </div>
+              </td>
+              <td>
+                <textarea id="input-data" tabindex=2></textarea>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                <h2>Encrypted Image (Public Key) <input id="public-image-url" type="text" value="" tabindex=1 placeholder="Public Key URL" /></h2>
+              </td>
+              <td>
+                <h2>Decrypted Message</h2>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                <div class="public-image">
+                  <canvas id="public"></canvas>
+                </div>
+              </td>
+              <td>
+                <div>
+                    <textarea id="output-data" readonly tabindex=4></textarea>
+                </div>
+              </td>
+          </tr>
+      </table>
+    <script src="index.js"></script>
+  </body>
+</html>
